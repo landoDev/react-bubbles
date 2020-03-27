@@ -18,10 +18,7 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
-    e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    // I got rid of the prevent default so it would rerender with new color
     axiosWithAuth()
     .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res=>{
@@ -32,9 +29,15 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    console.log(color)
+    axiosWithAuth()
+    .delete(`/api/colors/${color.id}`)
+    .then(res=>{
+      console.log('DELETE response', res)
+      alert(`You have deleted ${color.color}, please refresh the page`)
+    })
   };
-  console.log('editing:',colorToEdit.id)
+  
   return (
     <div className="colors-wrap">
       <p>colors</p>
