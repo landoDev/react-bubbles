@@ -35,7 +35,7 @@ const Login = () => {
       setLoggingIn(false);
       // props.history.push('/bubbles-page')
       // HISTORY HOOK OPTION
-      history.push('/')
+      history.push('/bubble-page')
     })
     .catch(err=>{
       console.log('Feels bad man', err);
