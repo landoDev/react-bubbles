@@ -13,19 +13,11 @@ const ColorList = ({ colors, updateColors }) => {
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [colorToAdd, setColorToAdd] = useState(initialColor)
 
-  const addColor = e => {
-    axiosWithAuth()
-    .post('/api/colors', colorToAdd)
-    .then(res=>{
-      console.log('POST to add color', res)
-    })
-    .catch(err=> console.log('failed to add color', err))
-  };
-
-  const editColor = e => {
+  const editColor = color => {
     setEditing(true);
-    setColorToAdd(colors);
+    setColorToEdit(color);
   };
+  
 
   const saveEdit = e => {
     // I got rid of the prevent default so it would rerender with new color
@@ -47,7 +39,7 @@ const ColorList = ({ colors, updateColors }) => {
       alert(`You have deleted ${color.color}, please refresh the page`)
     })
   };
-
+  console.log(colorToEdit)
   return (
     <div className="colors-wrap">
       <p>colors</p>
@@ -102,27 +94,27 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      <form onSubmit={addColor}>
+      <form onSubmit={saveEdit}>
           <legend>add color</legend>
           <label>
             color name:
             <input
               onChange={e =>
-                setColorToAdd({ ...colorToAdd, color: e.target.value })
+                setColorToEdit({ ...colorToEdit, color: e.target.value })
               }
-              value={colorToAdd.color}
+              value={colorToEdit.color}
             />
           </label>
           <label>
             hex code:
             <input
               onChange={e =>
-                setColorToAdd({
-                  ...colorToAdd,
+                setColorToEdit({
+                  ...colorToEdit,
                   code: { hex: e.target.value }
                 })
               }
-              value={colorToAdd.code.hex}
+              value={colorToEdit.code.hex}
             />
           </label>
           <div className="button-row">
