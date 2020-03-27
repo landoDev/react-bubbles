@@ -42,10 +42,12 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const addColor = e =>{
+    e.preventDefault();
     axiosWithAuth()
-    .post('/api/colors', addColor)
+    .post('/api/colors', colorToAdd)
     .then(res=>{
-      console.log('color added',res)
+      alert(`You have added ${colorToAdd.color}`)
+      window.location.reload();
     })
     .catch(err=>console.log(err))
   }
@@ -104,7 +106,7 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      <form onSubmit={saveEdit}>
+      <form onSubmit={addColor}>
           <legend>add color</legend>
           <label>
             color name:
