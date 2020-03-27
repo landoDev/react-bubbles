@@ -25,13 +25,13 @@ const Login = () => {
   }
   const handleLogin = e =>{
     e.preventDefault();
+    // AXIOS POST WASNT LISTENING TO AXIOSWITHAUTH ASK WHY VERY CONFUSING
     axiosWithAuth()
-    .post('', user)
+    .post('http://localhost:5000/api/login', user)
     .then(res=>{
       console.log('response in login POST:', res);
-      setLoggingIn(true)
-      // may need to JSON stringify below and may need to add payload to res.data
-      localStorage.setItem('token', res.data);
+      setLoggingIn(true);
+      localStorage.setItem('token', JSON.stringify(res.data.payload));
       setLoggingIn(false);
       // props.history.push('/bubbles-page')
       // HISTORY HOOK OPTION
@@ -47,6 +47,7 @@ const Login = () => {
     })
   }
   console.log('checking handle changes', user)
+  console.log('logging state progression', loggingIn)
 
   return (
     <>
