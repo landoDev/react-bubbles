@@ -8,7 +8,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log('color list passed down by props', colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [colorToAdd, setColorToAdd] = useState(initialColor)
@@ -24,18 +23,15 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
     .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res=>{
-      console.log('PUT response', res);
       setColorToEdit(res.data)
     })
     .catch(err=> console.log('oops', err))
   };
 
   const deleteColor = color => {
-    console.log(color)
     axiosWithAuth()
     .delete(`/api/colors/${color.id}`)
     .then(res=>{
-      console.log('DELETE response', res)
       alert(`You have deleted ${color.color}`)
       window.location.reload();
     })
@@ -51,7 +47,7 @@ const ColorList = ({ colors, updateColors }) => {
     })
     .catch(err=>console.log(err))
   }
-  console.log(colorToEdit)
+
   return (
     <div className="colors-wrap">
       <p>colors</p>

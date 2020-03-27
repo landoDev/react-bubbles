@@ -26,7 +26,6 @@ const Login = () => {
     axiosWithAuth()
     .post('/api/login', credentials)
     .then(res=>{
-      console.log('response in login POST:', res);
       setLoggingIn(true);
       localStorage.setItem('token', JSON.stringify(res.data.payload));
       setLoggingIn(false);
@@ -41,8 +40,7 @@ const Login = () => {
       })
     })
   }
-  console.log('checking handle changes', credentials)
-  console.log('logging state progression', loggingIn)
+
 
   return (
     <>
