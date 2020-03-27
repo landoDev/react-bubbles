@@ -40,6 +40,15 @@ const ColorList = ({ colors, updateColors }) => {
       window.location.reload();
     })
   };
+
+  const addColor = e =>{
+    axiosWithAuth()
+    .post('/api/colors', addColor)
+    .then(res=>{
+      console.log('color added',res)
+    })
+    .catch(err=>console.log(err))
+  }
   console.log(colorToEdit)
   return (
     <div className="colors-wrap">
@@ -101,21 +110,21 @@ const ColorList = ({ colors, updateColors }) => {
             color name:
             <input
               onChange={e =>
-                setColorToEdit({ ...colorToEdit, color: e.target.value })
+                setColorToAdd({ ...colorToAdd, color: e.target.value })
               }
-              value={colorToEdit.color}
+              value={colorToAdd.color}
             />
           </label>
           <label>
             hex code:
             <input
               onChange={e =>
-                setColorToEdit({
-                  ...colorToEdit,
+                setColorToAdd({
+                  ...colorToAdd,
                   code: { hex: e.target.value }
                 })
               }
-              value={colorToEdit.code.hex}
+              value={colorToAdd.code.hex}
             />
           </label>
           <div className="button-row">
