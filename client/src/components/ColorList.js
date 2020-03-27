@@ -36,7 +36,8 @@ const ColorList = ({ colors, updateColors }) => {
     .delete(`/api/colors/${color.id}`)
     .then(res=>{
       console.log('DELETE response', res)
-      alert(`You have deleted ${color.color}, please refresh the page`)
+      alert(`You have deleted ${color.color}`)
+      window.location.reload();
     })
   };
   console.log(colorToEdit)
